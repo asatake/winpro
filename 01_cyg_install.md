@@ -82,7 +82,7 @@ _（注）.minttyrcというのは拡張子のように見えますが、こう�
 
 例えば私の場合、このファイルにはこう書かれています。（括弧内は書いてませんが補足説明です）
 
-    Locale=ja_JP  
+    Locale=ja_JP  (言語設定？)
     Charset=SJIS  (文字コード、こうしないと日本語表示されない)
     Font=Mgen+ 2m regular (フォントの設定)
     FontHeight=11　(フォントサイズ)
@@ -91,9 +91,79 @@ _（注）.minttyrcというのは拡張子のように見えますが、こう�
     ForegroundColour=255,255,255　(文字色、ここでは白)
     CursorColour=255,255,255　(カーソルの色、ここでは白)
     OpaqueWhenFocused=no　(よくわからない)
-    Transparency=40　(Cygwinをどれだけ透過するか)
+    Transparency=40　(Cygwinのウインドウをどれだけ透過するか)
 _ _ _
 
 ####3.設定(.bashrc)
+
+先ほどの.minttyrcと同じフォルダで作業します。  
+.bashrcとほ、コマンドライン自体の設定です。  
+こっちのほうが複雑ですので、以下の例をそのまま使っていいと思います。  
+ただ、それで物足りなくなる場合は、随時追加していきましょう。
+
+_（注）.bashrcというのは拡張子のように見えますが、こういうファイル名です。  
+なので「.」以前に何か文字を入れると機能しなくなりますのでご注意を。_
+
+1. Cygwinをインストールしたフォルダに移動します。  
+（何もいじっていなければ"C:\cygwin64"のはず）  
+2. そこから、Home -> (ユーザ名の書かれたフォルダ)と開いていきます。  
+3. .bashrcというファイルを開く、または作成します。  
+4. 以下のように記述し、保存してください。
+
+
+    # Source global definitions
+    if [ -f /etc/bashrc ]; then
+        . /etc/bashrc
+    fi
+
+    ulimit -c 0
+    umask 022
+    set history=200
+    set savehistory=200
+    set -o ignoreeof
+    unset autologout
+
+    export SHELL=/bin/bash
+    export HOME=/home/UserName (UserNameには自分のユーザー名を入れます)
+    export TMPDIR=/tmp
+    export TZ=JST-09
+    export MAKE_MODE=unix
+
+    PAGER=less
+    JLESSCHARSET=japanese-sjis
+    export PATH PAGER JLESSCHARSET
+
+    PS1="$HOSTNAME:\w$ "
+
+    if [ -n ${DISPLAY} ]; then
+        export DISPLAY=localhost:0.0
+    fi
+
+    if [ ! -n "${TERM}" ]; then
+        TERM=cygwin
+    fi
+
+    alias ls="ls -F --color=auto --show-control-char"
+    alias la="ls -aF"
+    alias ll="ls -l"
+    alias j=jobs
+    alias vi=vim
+    alias more=less
+
+    SYSTEM=`cygpath -u ${SYSTEMROOT}`/system32
+    alias ping="$SYSTEM/ping.exe"
+    alias arp="$SYSTEM/arp.exe"
+    alias nslookup="$SYSTEM/nslookup.exe"
+    alias traceroute="$SYSTEM/tracert.exe"
+    alias route="$SYSTEM/route.exe"
+    alias netstat="$SYSTEM/netstat.exe"
+    alias ipconfig="$SYSTEM/ipconfig.exe"
+    alias ifconfig=ipconfig
+    #alias start="$SYSTEM/CMD.exe /c start"
+    alias start=cygstart
+    unset SYSTEM
+_ _ _
+
+####4.
 
 執筆中.
