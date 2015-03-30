@@ -81,17 +81,18 @@ _（注）.minttyrcというのは拡張子のように見えますが、こう�
 なので「.」以前に何か文字を入れると機能しなくなりますのでご注意を。_  
 
 例えば私の場合、このファイルにはこう書かれています。（括弧内は書いてませんが補足説明です）
-
-    Locale=ja_JP  (言語設定？)
-    Charset=SJIS  (文字コード、こうしないと日本語表示されない)
-    Font=Mgen+ 2m regular (フォントの設定)
-    FontHeight=11　(フォントサイズ)
-    FontIsBold=no　(フォントを太字にするかどうか)
-    BackgroundColour=0,0,0　(背景色、ここでは黒)
-    ForegroundColour=255,255,255　(文字色、ここでは白)
-    CursorColour=255,255,255　(カーソルの色、ここでは白)
-    OpaqueWhenFocused=no　(よくわからない)
-    Transparency=40　(Cygwinのウインドウをどれだけ透過するか)
+```bash
+Locale=ja_JP  (言語設定？)
+Charset=SJIS  (文字コード、こうしないと日本語表示されない)
+Font=Mgen+ 2m regular (フォントの設定)
+FontHeight=11　(フォントサイズ)
+FontIsBold=no　(フォントを太字にするかどうか)
+BackgroundColour=0,0,0　(背景色、ここでは黒)
+ForegroundColour=255,255,255　(文字色、ここでは白)
+CursorColour=255,255,255　(カーソルの色、ここでは白)
+OpaqueWhenFocused=no　(よくわからない)
+Transparency=40　(Cygwinのウインドウをどれだけ透過するか)
+```
 _ _ _
 
 ####3.設定(.bashrc)
@@ -110,7 +111,7 @@ _（注）.bashrcというのは拡張子のように見えますが、こうい
 3. .bashrcというファイルを開く、または作成します。  
 4. 以下のように記述し、保存してください。
 
-'''bash
+```bash
 # Source global definitions
 if [ -f /etc/bashrc ]; then
     . /etc/bashrc
@@ -162,7 +163,7 @@ alias ifconfig=ipconfig
 #alias start="$SYSTEM/CMD.exe /c start"
 alias start=cygstart
 unset SYSTEM
-'''
+```
 _ _ _
 
 ####4.
