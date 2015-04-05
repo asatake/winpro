@@ -157,6 +157,6 @@ call neobundle#end()
 なお、colorscheme asataken-syntaxについてですが、  
 256-jungleを自分好みにカスタマイズしたものです。  
 こちらからどうぞ。  
-[asataken-syntax](vim_set/asataken-syntax.vim)  
+[asataken-syntax](asataken-syntax.vim)  
 これも、見づらいと思ったら自分でいじっちゃっていいと思います。  
 これについては解説しませんので、他の記事を参考にしてください。
