@@ -37,6 +37,8 @@ Windowsに最初から入っている「コマンドプロンプト」だと色�
 
 さて、ここで今回入れるパッケージですが、とりあえず次のものを入れておきます。
 - wget(必須)
+- gnupg(必須？)
+- gawk(必須？)
 - gcc(C言語プログラミングに必須)
 
 他に追加したいものがあれば、いつでもここからパッケージを入れることができます。
@@ -68,6 +70,11 @@ _ _ _
 __この先は「サクラエディタ」をインストールしていることを推奨します。__  
 サクラエディタ公式サイトは[__こちら__](http://sakura-editor.sourceforge.net/)  
 そうでもしないと設定ファイルを書き換える手段が難しくなります…。
+
+また、Vimというテキストエディタもおすすめです。  
+Cygwin上で開けるので、慣れるとこちらのほうが早いかもしれません。
+設定方法はこちらから。  
+__[>Cygwin使いのVim](vim_set/vim_beg.md)__
 
 1. Cygwinをインストールしたフォルダに移動します。  
 （何もいじっていなければ"C:\cygwin64"のはず）  
@@ -130,6 +137,15 @@ export TMPDIR=/tmp
 export TZ=JST-09
 export MAKE_MODE=unix
 
+# PATH Setting
+PATH="/usr/bin"
+export PATH="/bin:$PATH"
+export PATH="/usr/local/sbin:$PATH"
+export PATH="/usr/sbin:$PATH"
+export PATH="/sbin:$PATH"
+export PATH="/usr/local/bin:$PATH"
+export PATH="/cygdrive/c/Windows/System32:$PATH"
+
 PAGER=less
 JLESSCHARSET=japanese-sjis
 export PATH PAGER JLESSCHARSET
@@ -144,13 +160,7 @@ if [ ! -n "${TERM}" ]; then
     TERM=cygwin
 fi
 
-alias ls="ls -F --color=auto --show-control-char"
-alias la="ls -aF"
-alias ll="ls -l"
-alias j=jobs
-alias vi=vim
-alias more=less
-
+# Windows System
 SYSTEM=`cygpath -u ${SYSTEMROOT}`/system32
 alias ping="$SYSTEM/ping.exe"
 alias arp="$SYSTEM/arp.exe"
@@ -162,14 +172,41 @@ alias ipconfig="$SYSTEM/ipconfig.exe"
 alias ifconfig=ipconfig
 #alias start="$SYSTEM/CMD.exe /c start"
 alias start=cygstart
+
+# alias
+alias ls="ls -F --color=auto --show-control-char"
+alias la="ls -aF"
+alias ll="ls -l"
+alias j=jobs
+alias vi=vim
+alias more=less
+alias restart='exec $SHELL -l'
+
 unset SYSTEM
 ```
 _ _ _
 
-####4.開いてみよう
+####4.開いて確認してみよう
 
 では、ここまで書いたらCygwinを起動してみましょう。  
-(別に2，3の過程をやってない状態で開いて支障はないです)  
-無事、何事も無く開けたらひとまず導入成功です。
+(別に2，3の過程をやってない状態で開いても支障はないです)  
+無事、何事もなく開けたらひとまず導入成功です。  
+初回起動時にはなにか文章が出ますが、初回だけですので気にしないでください。  
+
+画面には、
+```
+UserName:~$
+```
+と書かれているはずです。(UserNameには自分のユーザ名)  
+これは、自分が今どのディレクトリにいるのかを表しています。  
+一番最初にいる場所を、ホームディレクトリと呼びます。
+
+この右側にコマンドを打つことができ、これによって色々な操作を行います。  
+これがコマンドラインの特徴です。  
+Windows付属のコマンドプロンプトも似たような感じですね。  
+最初は慣れないと思いますが、どんどん使って慣れていきましょう！
+_ _ _
+
+####5.apt-cygの導入
 
 執筆中.
