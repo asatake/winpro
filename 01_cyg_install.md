@@ -5,6 +5,8 @@ _ _ _
 正直、この作業が一番大変かもしれません。(時間かかるし)  
 ここで心が折れてしまいそうですが、頑張りましょう！
 
+あと、今回かなり文章も長いです。根気よくいきましょう。
+
 #####今回導入するもの
 * __Cygwin__
 
@@ -39,7 +41,8 @@ Windowsに最初から入っている「コマンドプロンプト」だと色�
 - wget(必須)
 - gnupg(必須？)
 - gawk(必須？)
-- gcc(C言語プログラミングに必須)
+- zsh(今後解説)
+- git(便利)
 
 他に追加したいものがあれば、いつでもここからパッケージを入れることができます。
 
@@ -90,8 +93,8 @@ _（注）.minttyrcというのは拡張子のように見えますが、こう�
 例えば私の場合、このファイルにはこう書かれています。（括弧内は書いてませんが補足説明です）
 ```bash
 Locale=ja_JP  (言語設定？)
-Charset=SJIS  (文字コード、こうしないと日本語表示されない)
-Font=Mgen+ 2m regular (フォントの設定)
+Charset=utf-8  (文字コード)
+Font=Mgen+ 2m regular (フォントの設定、お好みで)
 FontHeight=11　(フォントサイズ)
 FontIsBold=no　(フォントを太字にするかどうか)
 BackgroundColour=0,0,0　(背景色、ここでは黒)
@@ -101,8 +104,8 @@ OpaqueWhenFocused=no　(よくわからない)
 Transparency=40　(Cygwinのウインドウをどれだけ透過するか)
 ```
 _ _ _
-
-####3.設定(.bashrc)
+####3.bashの設定(.bashrc)
+やっぱりシェルはbashにしたい！もしくはzshの導入めんどくさい！という人向けに。
 
 先ほどの.minttyrcと同じフォルダで作業します。  
 .bashrcとほ、コマンドライン自体の設定です。  
@@ -184,6 +187,16 @@ alias restart='exec $SHELL -l'
 
 unset SYSTEM
 ```
+#####補足
+ここで書いた'export PATH'というものは、PATH(パスと読む)を追加しています。  
+PATHは、ホームディレクトリからそのファイルの場所までの道のり、といった感じのものです。
+
+また、aliasというのは、そのコマンドを打った時に何をするかを設定するものです。
+私の例で、一番下の方に`alias restart='exec $SHELL -l'`というのを入れましたが、  
+これはcygwinの設定ファイルを読み込み直すためにcygwinのシステムを開きなおしています。  
+毎回`exec $SHELL -l`と書くのは面倒だし、覚えられないので、  
+'restart'とコマンドを打つとそれを実行するように設定しています。
+
 _ _ _
 
 ####4.開いて確認してみよう
@@ -207,6 +220,73 @@ Windows付属のコマンドプロンプトも似たような感じですね。
 最初は慣れないと思いますが、どんどん使って慣れていきましょう！
 _ _ _
 
+####5.zshの設定とoh_my_zshの導入
+
+このままでも十分使えるのですが、処理が軽く、使い勝手が個人的に良いと思うzshを使いたいと思います。
+先ほどCygwinのインストールの時にさらっとzshを入れました。  
+一度コマンドで「zsh」と打って実行するとどんなものなのかわかると思います。  
+
+このままだとちょっと見づらいので、まずはテーマを設定して見やすくしたいと思います。  
+今回は、oh_my_zshを導入します。
+
+1. Cygwinを開いたら、次のコマンドを入力します。
+```
+git clone git://github.com/robbyrussell/oh-my-zsh.git ~/.oh-my-zsh
+```
+2. 終わったら次のコマンドを入力します。
+```
+cp ~/.oh-my-zsh/templates/zshrc.zsh-template ~/.zshrc
+```
+3. .bashrcと同じように、ホームディレクトリ上に.zshrcというファイルを作成、または編集します。
+4. もともとファイルがあった場合、なにかいろいろ書いてあって難しいので、一番下に以下を記述します。  
+(これは.bashrcに書いたものとほぼ同じです)
+
+```bash
+# Windows System
+SYSTEM=`cygpath -u ${SYSTEMROOT}`/system32
+alias ping="$SYSTEM/ping.exe"
+alias arp="$SYSTEM/arp.exe"
+alias nslookup="$SYSTEM/nslookup.exe"
+alias traceroute="$SYSTEM/tracert.exe"
+alias route="$SYSTEM/route.exe"
+alias netstat="$SYSTEM/netstat.exe"
+alias ipconfig="$SYSTEM/ipconfig.exe"
+alias ifconfig=ipconfig
+
+# alias
+alias ls="ls -F --color=auto --show-control-char"
+alias la="ls -aF"
+alias ll="ls -l"
+alias j=jobs
+alias more=less
+#alias start="$SYSTEM/CMD.exe /c start"
+alias start=cygstart
+alias open=cygstart
+alias vi=vim
+alias restart='exec $SHELL -l'
+```
+
+ここで、一度cygwinを閉じて、もう一度開きます。(設定ファイルを読み込み直します)
+zsh自体の設定はできたので、cygwinを開いた時に自動でzshを開くように設定します。
+1. `mkpasswd -l > /etc/passwd`というこコマンドを入力します。
+2. C:\cygwin\etcにあるpasswdというファイルを編集します。  
+(viを使う方は`vi /etc/passwd`で開きます)
+3. 'bash'と書いてあるところを'zsh'と書き換えて保存します。
+4. cygwinを再起動します。
+
+これで、zshが開いたら成功です。  
+(確認方法は、'bash'と入力してbashが開き、'exit'と入力してcygwinが閉じなければ成功です)
+
+次に、テーマを変えます。  
+以下のリンク先にサンプルがあるので、好きなデザインを選んでください。  
+[Themes - robbyrussell/oh-my-zsh](https://github.com/robbyrussell/oh-my-zsh/wiki/themes)  
+そして、.zshrcを開き、以下の箇所を変更します。
+```
+ZSH_THEME="自分の選んだテーマ名"
+```
+筆者の場合はgentooというテーマを選んだので、`ZSH_THEME="gentoo"`となっています。  
+cygwinを再起動して、テーマが変わっていたら成功です。
+_ _ _
 ####5.apt-cygの導入
 
 執筆中.
