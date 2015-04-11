@@ -1,11 +1,10 @@
 # #01 Cygwinの導入編
-_ _ _
 
 どの言語をやるにあたっても必要になるソフトの導入をしてしまおうと思います。  
 正直、この作業が一番大変かもしれません。(時間かかるし)  
 ここで心が折れてしまいそうですが、頑張りましょう！
 
-あと、今回かなり文章も長いです。根気よくいきましょう。
+あと、今回丁寧に説明する関係で、かなり文章も長いです。根気よくいきましょう。
 
 #####今回導入するもの
 * __Cygwin__
@@ -250,6 +249,15 @@ _（注）.zshrcというのは拡張子のように見えますが、こうい�
 (これは.bashrcに書いたものとほぼ同じです)
 
 ```bash
+# PATH Setting
+PATH="/usr/bin"
+export PATH="/bin:$PATH"
+export PATH="/usr/local/sbin:$PATH"
+export PATH="/usr/sbin:$PATH"
+export PATH="/sbin:$PATH"
+export PATH="/usr/local/bin:$PATH"
+export PATH="/cygdrive/c/Windows/System32:$PATH"
+
 # Windows System
 SYSTEM=`cygpath -u ${SYSTEMROOT}`/system32
 alias ping="$SYSTEM/ping.exe"
@@ -311,4 +319,56 @@ _ _ _
 apt-cygよりもchocolateyの方がお勧めですが、一応両方入れておくことをおすすめします。  
 というのも、片方ではパッケージとして登録されていないものも存在するからです。
 
-<apt-cygの導入>
+#####<apt-cygの導入>
+コマンドを打っていくだけで終わります。
+
+1. 次のコマンドを順番に打ちます。
+```
+wget https://raw.github.com/kou1okada/apt-cyg/master/apt-cyg
+mv apt-cyg /usr/local/bin/
+chmod 755 /usr/local/bin/apt-cyg
+```
+2. bashを使う方は.bashrc、zshを使う方は.zshrcに以下の文を入れておきます。  
+```
+alias apt-cyg="apt-cyg -X"
+```
+3. cygwinを起動し直すと、以上の設定が有効になり、apt-cygを使えます。
+
+使い方は、以下の感じです。  
+```
+apt-cyg install パッケージ　(パッケージをインストール)
+apt-cyg find パッケージ　(パッケージを検索)
+apt-cyg update  (apt-cygを更新)
+apt-cyg uninstall パッケージ (パッケージをアンインストール)
+```
+#####<chocolateyの導入>
+Cygwinではなく、コマンドプロンプトを使います。
+
+1. Windows8以降の場合はスタートメニューを開いて右上の虫眼鏡のマークで検索の画面に、  
+Windows7以前の場合はスタートメニューを開いたときの下の方にある検索ボックスに、  
+「cmd」と打って、Ctrl+Shift+Enterを押して、コマンドプロンプトを開いてください。
+2. コマンドプロンプトに、以下のコマンドを打ってください。
+```
+@powershell -NoProfile -ExecutionPolicy unrestricted -Command "(iex ((new-object net.webclient).DownloadString('https://chocolatey.org/install.ps1'))) >$null 2>&1" && SET PATH=%PATH%;%ALLUSERSPROFILE%\chocolatey\bin
+```
+3. インストールは完了したので、次に.zshrcまたは.bashrcに次の行を書き加えます。
+```
+export PATH="/cygdrive/c/ProgramData/chocolatey/bin:$PATH"
+```
+
+chocolateyは管理者権限を必要とするので、今後cygwinは管理者として開くようにしましょう。
+Cygwinのショートカットがあるなら、右クリックしてプロパティを開き、  
+「互換性」タブから「管理者としてこのプログラムを実行」にチェックを入れてOKを押しましょう。
+
+使い方は、次のとおりです。
+```
+choco install パッケージ (パッケージをインストール)
+choco update パッケージ　(パッケージをアップデート)
+choco list パッケージ名　(パッケージ名で検索)
+choco uninstall パッケージ (パッケージをアンインストール)
+```
+
+####7.参考文献
+- [64bit版Cygwinをインストールしてapt-cygするまで - DQNEO起業日記](http://dqn.sakusakutto.jp/2013/12/64bit_cygwin_apt-cyg.html)  
+- [robbyrussell/oh-my-zsh - GitHub](https://github.com/robbyrussell/oh-my-zsh)  
+- [Windowsでもパッケージ管理！ Chocolateyの紹介 - Intelligent Technology's Technical Blog](http://iti.hatenablog.jp/entry/2014/11/06/122553)
