@@ -274,8 +274,8 @@ alias vi=vim
 alias restart='exec $SHELL -l'
 ```
 
-ここで、一度cygwinを閉じて、もう一度開きます。(設定ファイルを読み込み直します)
-zsh自体の設定はできたので、cygwinを開いた時に自動でzshを開くように設定します。
+ここで、一度cygwinを閉じて、もう一度開きます。(設定ファイルを読み込み直します)  
+zsh自体の設定はできたので、cygwinを開いた時に自動でzshを開くように設定します。  
 1. `mkpasswd -l > /etc/passwd`というこコマンドを入力します。  
 2. C:\cygwin\etcにあるpasswdというファイルを編集します。  
 (viを使う方は`vi /etc/passwd`で開きます)  
