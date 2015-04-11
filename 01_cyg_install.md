@@ -24,7 +24,7 @@ Windowsに最初から入っている「コマンドプロンプト」だと色�
 3. [bashの設定(.bashrc)](#3bashの設定bashrc)  
 4. [開いて確認してみよう](#4開いて確認してみよう)  
 5. [zshの設定とoh_my_zshの導入](#5zshの設定とoh_my_zshの導入)  
-6. [apt-cygとchocolateyの導入](#6aptcygとchocolateyの導入)  
+6. [apt-cygとchocolateyの導入](#6apt-cygとchocolateyの導入)  
 
 ####1.インストール
 
