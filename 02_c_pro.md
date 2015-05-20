@@ -49,7 +49,7 @@ git config user.email "自分のメールアドレス"
 ```bash
 alias atom='cmd /c atom'
 ```
-5. Cygwinを再帰動し、「atom」と入力して起動してみましょう。  
+Cygwinを再帰動し、「atom」と入力して起動してみましょう。  
 (以後、Atomを起動するときはCygwinから起動してください。)
 
 これで、とりあえずの環境は整いました。  
