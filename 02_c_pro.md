@@ -5,7 +5,6 @@ C言語を学ぶ環境を整えます。
 
 #####今回導入するもの
 - __gcc__
-- __LLVM Clang__
 - __Atom__
 
 エディタとコンパイラを導入します。  
@@ -30,15 +29,33 @@ gcc --version
 ```
 
 
-#### #Clangの導入
-最近流行ってる(?)C言語コンパイラ、Clangを入れます。  
-通常入れなくていいですが、このつぎに紹介するエディタの関係で入れます。
+###2. エディタの導入
+エディタは、今回Atomを導入します。  
+Vimを使いたい人は、こちらをどうぞ。  
+Vimもお勧めです。
 
-[__LLVM Clang DownloadPage__](http://llvm.org/releases/download.html)
+__[>Cygwin使いのVim](vim_set/vim_beg.md)__
 
-ここから、一番上のバージョンの「Pre-built Binaries:」という欄から、  
-「Clang for Windows」を選択し、ダウンロードし、実行します。  
-適当にNextを連打してインストール完了です。
+では、Atomを導入します。  
 
-###2. Atomの導入
-執筆中.
+1. [Atom公式サイト](https://atom.io/)から、Downloadボタンを押してインストーラをダウンロードし、実行します。  
+2. 勝手にインストールされます。
+3. Cygwinを開き、次のコマンドを編集して入れてください。
+```
+git config user.name "自分の名前(英数字)"
+git config user.email "自分のメールアドレス"
+```
+4. また、ホームディレクトリにある.zshrc、または.bashrcを開き、次の一文を入れてください。
+```bash
+alias atom='cmd /c atom'
+```
+5. Cygwinを再帰動し、「atom」と入力して起動してみましょう。  
+(以後、Atomを起動するときはCygwinから起動してください。)
+
+これで、とりあえずの環境は整いました。  
+もっと使いやすくするために次のようなプラグインを入れるのもいいと思います。  
+ただ、少しお重くなったりもするので、お好みで入れてください。
+
+* linter
+* linter clang
+* autocomplete clang
