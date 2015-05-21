@@ -45,11 +45,17 @@ __[>Cygwin使いのVim](vim_set/vim_beg.md)__
 git config user.name "自分の名前(英数字)"
 git config user.email "自分のメールアドレス"
 ```
+
 4. また、ホームディレクトリにある.zshrc、または.bashrcを開き、次の一文を入れてください。
 ```bash
 alias atom='cmd /c atom'
 ```
-Cygwinを再帰動し、「atom」と入力して起動してみましょう。  
+これで起動しない場合は、Windowsの環境変数に次のパスを追加してみてください。
+```bash
+C:\Users\ユーザ名\AppData\Local\atom\bin
+```
+
+5. Cygwinを再帰動し、「atom」と入力して起動してみましょう。  
 (以後、Atomを起動するときはCygwinから起動してください。)
 
 これで、とりあえずの環境は整いました。  
