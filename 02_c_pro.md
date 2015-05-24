@@ -54,13 +54,10 @@ alias atom='cmd /c atom'
 ```bash
 C:\Users\ユーザ名\AppData\Local\atom\bin
 ```
-<<<<<<< HEAD
 それでもだめなら、上に書いたaliasを次のように変更してください。
 ```bash
 alias atom='cmd /c C:/Users/ユーザ名/AppData/Local/atom/bin/atom.cmd'
 ```
-=======
->>>>>>> parent of dbf03f9... add
 
 5. Cygwinを再帰動し、「atom」と入力して起動してみましょう。  
 (以後、Atomを起動するときはCygwinから起動してください。)
