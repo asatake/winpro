@@ -56,7 +56,7 @@ C:\Users\ユーザ名\AppData\Local\atom\bin
 ```
 それでもだめなら、上に書いたaliasを次のように変更してください。
 ```bash
-alias atom='cmd /c C:\Users\ユーザ名\AppData\Local\atom\bin'
+alias atom='cmd /c C:/Users/ユーザ名/AppData/Local/atom/bin/atom.cmd'
 ```
 
 5. Cygwinを再帰動し、「atom」と入力して起動してみましょう。  
