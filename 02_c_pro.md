@@ -54,6 +54,10 @@ alias atom='cmd /c atom'
 ```bash
 C:\Users\ユーザ名\AppData\Local\atom\bin
 ```
+それでもだめなら、上に書いたaliasを次のように変更してください。
+```bash
+alias atom='cmd /c C:\Users\ユーザ名\AppData\Local\atom\bin'
+```
 
 5. Cygwinを再帰動し、「atom」と入力して起動してみましょう。  
 (以後、Atomを起動するときはCygwinから起動してください。)
@@ -65,3 +69,72 @@ C:\Users\ユーザ名\AppData\Local\atom\bin
 * linter
 * linter clang
 * autocomplete clang
+
+
+###3. 実際の使い方
+では実際の使い方を簡単な例で試してみましょう。
+
+まず、Cygwinで適当なフォルダにcdコマンドで移動して、
+```
+$ atom test.c
+```
+と言った感じでCファイルを作成してatomで開きます。  
+では、次のコードを書いて保存してみましょう。
+```c
+#include <stdio.h>
+
+int main(){
+  printf("hello, world!\n");
+  return 0;
+}
+```
+そしたらCygwinに戻り、次のコマンドを順番に打ちます。
+```
+$ gcc test.c -o test
+$ ./test
+```
+これを打って、「hello, world!」と表示されたら成功です。
+
+解説をすると、gccでは、-oの後に書いたファイル名の実行ファイルができます。  
+-oオプションを入れないと、a.outというファイルができるので、  
+./aとうつと実行できます。  
+面倒な場合はこれでもいいでしょう。
+
+次に、ファイルの簡易的な読み込みをやってみましょう。
+次のCファイルを作成してみてください。
+```c
+// test2.c
+#include <stdio.h>
+
+int main(){
+  int i;
+  int num[15] = {0};
+
+  for (i = 0; i < 10; i++) {
+    scanf("%d", &num[i]);
+  }
+
+  printf("num: ");
+  for (i = 0; i < 10; i++) {
+    printf("%d ", num[i]);
+  }
+  printf("\n");
+  return 0;
+}
+```
+さらに、次のファイル(ここでは名前をfiboとします)を作成してください。  
+拡張子は付けなくていいです。
+```
+1 1 2 3 5 8 13 21 34 55 89
+```
+ではCygwinで次のように打ってください。
+```
+$ gcc test2.c -o test2
+$ ./test2 < fibo
+```
+すると、さきほど作ったファイルの「55」までが表示されたかと思います。  
+何をしたかというと、test2に対してfiboを読み込ませることで、  
+scanfでの入力をfiboに書いてある内容にし、入力を簡易化したのです。  
+とても便利なテクニックなので、覚えておくといいでしょう。  
+試しに、さっきのCコードのループ回数(forの中身の数字)を10から11に変えてみましょう。  
+すると、89まで表示されました。これでなんとなくわかりましたかね？
